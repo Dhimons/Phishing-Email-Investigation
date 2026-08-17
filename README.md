@@ -25,24 +25,32 @@ Two distinct phishing variants were utilized in this attack campaign alongside l
 
 
 * **Variant B (Passed Authentication / Lookalike Domain):** Sent from an attacker-controlled lookalike domain (`cloudora-hr-portal.example`) and successfully passed authentication checks (`spf=pass`, `dkim=pass`, `dmarc=pass`), proving that successful authentication alone does not guarantee message safety.
-  * *[Drop screenshot `2 diff server_2.jpg` here]*
-  * *[Drop screenshot `One same domain_3.png` here]*
+<img width="1920" height="1080" alt="2 diff server" src="https://github.com/user-attachments/assets/1f9ffabb-4327-4dfd-a562-c41f99d82b1c" />
+
+ <img width="1920" height="1080" alt="One same domain" src="https://github.com/user-attachments/assets/7d934280-8e7d-4d48-8cb1-39b18aa8dace" />
+
 
 * **Benign False Positive (Mailchimp Newsletter):** An employee-forwarded "Cloudora Monthly" newsletter sent via Mailchimp (`mail105.suw16.mcsv.net`, IP `198.18.60.5`) was fully verified as a legitimate, authenticated marketing message.
-  * *[Drop screenshot `newsletter authentication pass_2.png` here]*
-  * *[Drop screenshot `comparison on real email and fake one_2.jpg` here]*
-  * *[Drop screenshot `cloudora known IP on letter one_2.png` here]*
-  * *[Drop screenshot `sends back to same domain letter onr_2.png` here]*
+<img width="1920" height="1080" alt="newsletter authentication pass" src="https://github.com/user-attachments/assets/a893a7e7-4d78-4680-aa41-9005b7d07a55" />
+
+  <img width="1920" height="1080" alt="comparison on real email and fake one" src="https://github.com/user-attachments/assets/1ace4bcb-8c45-4f92-9d73-c8553cdeaf18" />
+
+ <img width="1920" height="1080" alt="cloudora known IP on letter one" src="https://github.com/user-attachments/assets/7913e8ba-57f2-4ea4-8dbc-76da8a35b15f" />
+
+ <img width="1920" height="1080" alt="sends back to same domain letter onr" src="https://github.com/user-attachments/assets/258b7452-e075-402b-9526-72d92c694104" />
+
 
 ---
 
 ### 2. Campaign Delivery Scope & Impact
 * **Delivery Metrics:** Analysis of mail flow tracking shows how many accounts were reached and whether messages were delivered or quarantined across the organization.
-  * *[Drop screenshot `No of acc it was delieverd to_2.png` here]*
+ <img width="1920" height="1080" alt="No of acc it was delieverd to" src="https://github.com/user-attachments/assets/751f8218-0a3f-4aab-9c2a-123417a247ed" />
+
 
 * **Credential Harvesting & Compromise:** Across the targeted distribution, users interacted with links. 2 accounts (`freya.lynn` and `ryan.boyd`) submitted credentials and were subsequently logged into by the attacker from the Netherlands (`198.18.7.200`).
-  * *[Drop screenshot `account who got compromised_2.jpg` here]*
-  * *[Drop screenshot `2 victim_2.png` here]*
+<img width="1920" height="1080" alt="account who got compromised" src="https://github.com/user-attachments/assets/336b407b-5192-447d-bcc5-709eba7c3411" />
+<img width="1920" height="1080" alt="2 victim" src="https://github.com/user-attachments/assets/b3451e34-7a5f-4354-8d24-cea85af75ad9" />
+
 
 ---
 
