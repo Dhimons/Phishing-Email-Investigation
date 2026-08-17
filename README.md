@@ -16,45 +16,62 @@ On August 25, 2026, a payroll-themed phishing campaign targeted Cloudora staff, 
 ### 1. Phishing Variants & Authentication Analysis
 Two distinct phishing variants were utilized in this attack campaign alongside legitimate communications:
 
-* **Variant A (Failed Authentication & Relays):** Spoofed the real `cloudora.io` domain but failed all authentication checks (`spf=fail`, `dkim=fail`, `dmarc=fail`). It utilized multiple relay servers within the same network block.
-<img width="1920" height="1080" alt="IP where it camefrom" src="https://github.com/user-attachments/assets/6d1548ae-8826-4bd8-a226-b11fbc797fcc" />
-*Explanation:* Displays the raw email header showing the specific sender IP address (`198.18.44.10`) from which the initial wave of Variant A phishing originated.
+* **Variant A (Failed Authentication & Relays):** Used the lookalike domain (`cloudora-hr-portal.example`) but failed all authentication checks (`spf=fail`, `dkim=fail`) because they were sent from unauthorized infrastructure across multiple IP addresses in the same network neighborhood.
 
-<img width="1920" height="1080" alt="Authenticaiton results the SPF, DKIM" src="https://github.com/user-attachments/assets/b08eacb9-dde6-4910-bd5d-c069175eae71" />
-*Explanation:* Highlights the failed authentication results (`spf=fail`, `dkim=fail`) indicating that the message source was not authorized to send mail on behalf of the domain.
-
-<img width="1920" height="1080" alt="3 differet ip but in same neighbouthood" src="https://github.com/user-attachments/assets/45a8d5f2-1264-42e6-b286-3ece0fc7ae6c" />
-*Explanation:* Demonstrates that multiple distinct IP addresses within the same subnet block were used to dispatch these phishing emails, revealing attacker infrastructure scaling.
+  * **Screenshot Evidence:**
+  <img width="1920" height="1080" alt="IP where it camefrom" src="https://github.com/user-attachments/assets/5e59dd96-702a-498f-9dcb-9a24696b97f3" />
   
+      *Explanation:* Displays the raw email header showing the specific sender IP address (`198.18.44.10`) from which the initial wave of Variant A phishing originated.
+     <img width="1920" height="1080" alt="Authenticaiton results the SPF, DKIM" src="https://github.com/user-attachments/assets/13312ec5-941c-45d8-87f3-dd83993b885e" />
+ 
+      *Explanation:* Highlights the failed authentication results (`spf=fail`, `dkim=fail`) indicating that the message source was not authorized to send mail on behalf of the domain.
+   <img width="1920" height="1080" alt="3 differet ip but in same neighbouthood" src="https://github.com/user-attachments/assets/8ec8e658-3de7-49d2-84c1-98db08d48735" />
+ 
+      *Explanation:* Demonstrates that multiple distinct IP addresses within the same subnet block were used to dispatch these phishing emails, revealing attacker infrastructure scaling.
+  
+* **Variant B (Passed Authentication / Lookalike Domain):** Sent from an attacker-controlled lookalike domain (`cloudora-hr-portal.example`) that successfully passed authentication checks (`spf=pass`, `dkim=pass`), proving that successful technical authentication alone does not guarantee message safety.
 
+  * **Screenshot Evidence:**
+    <img width="1920" height="1080" alt="2 diff server" src="https://github.com/user-attachments/assets/d305b9b2-5efe-4d21-8896-c764929e3b89" />
+       *Explanation:* Shows the routing headers across two different intermediate mail relay servers involved in transmitting Variant B.
+   <img width="1920" height="1080" alt="One same domain" src="https://github.com/user-attachments/assets/fb3ceaa9-e29e-4132-a943-8345ad469a92" />
+  
+      *Explanation:* Highlights the header configuration where the return-path and envelope sender point back to the lookalike domain structure.
 
-* **Variant B (Passed Authentication / Lookalike Domain):** Sent from an attacker-controlled lookalike domain (`cloudora-hr-portal.example`) and successfully passed authentication checks (`spf=pass`, `dkim=pass`, `dmarc=pass`), proving that successful authentication alone does not guarantee message safety.
-<img width="1920" height="1080" alt="2 diff server" src="https://github.com/user-attachments/assets/1f9ffabb-4327-4dfd-a562-c41f99d82b1c" />
+* **Benign False Positive (Mailchimp Newsletter):** An employee-forwarded "Cloudora Monthly" newsletter sent via Mailchimp (`mail105.suw16.mcsv.net`, IP `198.18.60.5`) was fully verified as a legitimate marketing communication.
 
- <img width="1920" height="1080" alt="One same domain" src="https://github.com/user-attachments/assets/7d934280-8e7d-4d48-8cb1-39b18aa8dace" />
-
-
-* **Benign False Positive (Mailchimp Newsletter):** An employee-forwarded "Cloudora Monthly" newsletter sent via Mailchimp (`mail105.suw16.mcsv.net`, IP `198.18.60.5`) was fully verified as a legitimate, authenticated marketing message.
-<img width="1920" height="1080" alt="newsletter authentication pass" src="https://github.com/user-attachments/assets/a893a7e7-4d78-4680-aa41-9005b7d07a55" />
-
-  <img width="1920" height="1080" alt="comparison on real email and fake one" src="https://github.com/user-attachments/assets/1ace4bcb-8c45-4f92-9d73-c8553cdeaf18" />
-
- <img width="1920" height="1080" alt="cloudora known IP on letter one" src="https://github.com/user-attachments/assets/7913e8ba-57f2-4ea4-8dbc-76da8a35b15f" />
-
- <img width="1920" height="1080" alt="sends back to same domain letter onr" src="https://github.com/user-attachments/assets/258b7452-e075-402b-9526-72d92c694104" />
-
+  * **Screenshot Evidence:**
+  <img width="1920" height="1080" alt="newsletter authentication pass" src="https://github.com/user-attachments/assets/09410a6f-13f1-43a1-be8d-54d74aea2eed" />
+       *Explanation:* Displays the successful authentication results (`spf=pass`, `dkim=pass`, `dmarc=pass`) for the legitimate Mailchimp delivery server.
+  <img width="1920" height="1080" alt="comparison on real email and fake one" src="https://github.com/user-attachments/assets/301f3f2f-1f58-4c98-842c-c09ade1b2e0e" />
+  
+      *Explanation:* A side-by-side technical comparison contrasting the cryptographic signatures of authentic marketing mail against simulated phishing attempts.
+    <img width="1920" height="1080" alt="cloudora known IP on letter one" src="https://github.com/user-attachments/assets/24a7811f-9abb-40b8-9eb8-fab61b5e9498" />
+  
+      *Explanation:* Confirms the authorized Mailchimp IP address (`198.18.60.5`) mapped against known corporate communication standards.
+  <img width="1920" height="1080" alt="sends back to same domain letter onr" src="https://github.com/user-attachments/assets/71e50696-bd86-4d7f-bb6c-4f25380a54d4" />
+  
+      *Explanation:* Illustrates the expected `From` and `Reply-To` headers pointing correctly to official internal identifiers.
 
 ---
 
 ### 2. Campaign Delivery Scope & Impact
-* **Delivery Metrics:** Analysis of mail flow tracking shows how many accounts were reached and whether messages were delivered or quarantined across the organization.
- <img width="1920" height="1080" alt="No of acc it was delieverd to" src="https://github.com/user-attachments/assets/751f8218-0a3f-4aab-9c2a-123417a247ed" />
+* **Delivery Metrics:** Analysis of mail flow tracking tracking how many accounts were reached.
 
+  * **Screenshot Evidence:**
+<img width="1920" height="1080" alt="No of acc it was delieverd to" src="https://github.com/user-attachments/assets/845461f2-9234-40b5-b361-67b7672bc64a" />
+  
+      *Explanation:* Email gateway logs showing the exact volume of recipient mailboxes targeted and successfully reached across the organization before mitigation rules took effect.
 
-* **Credential Harvesting & Compromise:** Across the targeted distribution, users interacted with links. 2 accounts (`freya.lynn` and `ryan.boyd`) submitted credentials and were subsequently logged into by the attacker from the Netherlands (`198.18.7.200`).
-<img width="1920" height="1080" alt="account who got compromised" src="https://github.com/user-attachments/assets/336b407b-5192-447d-bcc5-709eba7c3411" />
-<img width="1920" height="1080" alt="2 victim" src="https://github.com/user-attachments/assets/b3451e34-7a5f-4354-8d24-cea85af75ad9" />
+* **Credential Harvesting & Compromise:** Across the targeted distribution, users interacted with malicious links. 
 
+  * **Screenshot Evidence:**
+  <img width="1920" height="1080" alt="account who got compromised" src="https://github.com/user-attachments/assets/fac67687-2810-4799-8173-3239ca7c93c8" />
+  
+      *Explanation:* Directory log identifying the user accounts (`freya.lynn` and `ryan.boyd`) whose sessions were hijacked following credential submission.
+  <img width="1920" height="1080" alt="2 victim" src="https://github.com/user-attachments/assets/4940e24a-6eba-412a-8df3-6e249f64d5ba" />
+  
+      *Explanation:* Security alert telemetry detailing the subsequent anomalous sign-in events originating from foreign IP infrastructure (`198.18.7.200` in the Netherlands).
 
 ---
 
