@@ -18,10 +18,14 @@ Two distinct phishing variants were utilized in this attack campaign alongside l
 
 * **Variant A (Failed Authentication & Relays):** Spoofed the real `cloudora.io` domain but failed all authentication checks (`spf=fail`, `dkim=fail`, `dmarc=fail`). It utilized multiple relay servers within the same network block.
 <img width="1920" height="1080" alt="IP where it camefrom" src="https://github.com/user-attachments/assets/6d1548ae-8826-4bd8-a226-b11fbc797fcc" />
+*Explanation:* Displays the raw email header showing the specific sender IP address (`198.18.44.10`) from which the initial wave of Variant A phishing originated.
 
 <img width="1920" height="1080" alt="Authenticaiton results the SPF, DKIM" src="https://github.com/user-attachments/assets/b08eacb9-dde6-4910-bd5d-c069175eae71" />
+*Explanation:* Highlights the failed authentication results (`spf=fail`, `dkim=fail`) indicating that the message source was not authorized to send mail on behalf of the domain.
 
 <img width="1920" height="1080" alt="3 differet ip but in same neighbouthood" src="https://github.com/user-attachments/assets/45a8d5f2-1264-42e6-b286-3ece0fc7ae6c" />
+*Explanation:* Demonstrates that multiple distinct IP addresses within the same subnet block were used to dispatch these phishing emails, revealing attacker infrastructure scaling.
+  
 
 
 * **Variant B (Passed Authentication / Lookalike Domain):** Sent from an attacker-controlled lookalike domain (`cloudora-hr-portal.example`) and successfully passed authentication checks (`spf=pass`, `dkim=pass`, `dmarc=pass`), proving that successful authentication alone does not guarantee message safety.
